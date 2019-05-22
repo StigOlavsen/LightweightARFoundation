@@ -1,0 +1,66 @@
+
+# IDE Files
+
+.vs
+.vscode
+.idea
+.consulo
+
+
+# Unity Folders
+
+[Ll]ibrary
+[Oo]bj
+[Tt]emp
+[Bb]uild
+
+
+# Project files
+
+**/*.sln
+**/*.suo
+**/*.userprefs
+**/*.csproj
+**/*.pdb
+**/*.pidb
+**/*.unityproj
+**/*.booproj
+**/*.orig
+**/*.orig.meta
+**/*.tmp
+**/*.user
+**/*.svd
+**/*.opendb
+
+# Unity3D generated meta files
+
+**/*.pidb.meta
+**/*.pdb.meta
+
+
+# Unity3D Generated File On Crash Reports
+
+sysinfo.txt
+
+
+# Builds
+
+**/*.apk
+**/*.unitypackage
+
+
+# OS Files
+
+**/.DS_Store
+**/[Tt]humbs.db
+
+
+# Autosaves
+
+**.blend?
+**/.autosave
+
+# Rider Plugin
+
+Assets/Plugins/Editor/JetBrains
+Assets/Plugins/Editor/JetBrains.meta
