@@ -3,6 +3,7 @@
     Properties
     {
         _MainTex("Texture", 2D) = "white" {}
+        _gamma ("Gamma", Float) = 2.2
     }
 
     // For GLES3
@@ -40,11 +41,13 @@
 #ifdef FRAGMENT
             varying vec2 textureCoord;
             uniform samplerExternalOES _MainTex;
+            uniform float _gamma;
 
             void main()
             {
 #ifdef SHADER_API_GLES3
                 gl_FragColor = texture(_MainTex, textureCoord);
+                gl_FragColor = pow(gl_FragColor, _gamma);
 #endif
             }
 

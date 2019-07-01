@@ -2,10 +2,11 @@ Shader "Unlit/ARKitLWRP"
 {
     Properties
     {
-        _textureY ("TextureY", 2D) = "white" {}
-        _textureCbCr ("TextureCbCr", 2D) = "black" {}
+        _textureY ("TextureY", 2D) = "black" {}
+        _textureCbCr ("TextureCbCr", 2D) = "gray" {}
+        _gamma ("Gamma", Float) = 2.2
     }
-    
+
     SubShader
     {
         Tags { "RenderType" = "Opaque" "RenderPipeline" = "LightweightPipeline"}
@@ -46,6 +47,7 @@ Shader "Unlit/ARKitLWRP"
             SAMPLER(sampler_textureY);
             TEXTURE2D(_textureCbCr);
             SAMPLER(sampler_textureCbCr);
+            float _gamma;
 
             VertexOutput Vertex(VertexInput i)
             {
@@ -62,13 +64,15 @@ Shader "Unlit/ARKitLWRP"
                 half4 ycbcr = half4(y, SAMPLE_TEXTURE2D(_textureCbCr, sampler_textureCbCr, i.uv).rg, 1.0);
 
                 const half4x4 ycbcrToRGBTransform = half4x4(
-                     half4(1.0, +0.0000, +1.4020, -0.7010),
-                     half4(1.0, -0.3441, -0.7141, +0.5291),
-                     half4(1.0, +1.7720, +0.0000, -0.8860),
+                    half4(1.0, +0.0000, +1.4020, -0.7010),
+                    half4(1.0, -0.3441, -0.7141, +0.5291),
+                    half4(1.0, +1.7720, +0.0000, -0.8860),
                     half4(0.0, +0.0000, +0.0000, +1.0000)
-                 );
+                );
 
-                return mul(ycbcrToRGBTransform, ycbcr);
+                half4 col = mul(ycbcrToRGBTransform, ycbcr);
+                col = pow(col, _gamma);
+                return col;
              }
             ENDHLSL
         }
